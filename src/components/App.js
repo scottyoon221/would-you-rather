@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
+import LoadingBar from 'react-redux-loading';
 import Nav from './Nav';
 import RandomQuestion from './RandomQuestion';
 import Home from './Home';
@@ -13,10 +14,7 @@ import My404 from './My404';
 
 
 class App extends Component {
-  //is usered logged in?
-  isLoggedIn() {
-    return this.props.loading;
-  }
+
 
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -24,86 +22,80 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <Fragment>
-          <div className="App">
-            <Nav />
-            {//check credential
-             this.isLoggedIn()
-              ? <div>
-                  <SignIn/>
-                </div>
-              : <div>
-                  <Route
-                    exact
-                    path="/"
-                    render={() => (
-                      <Redirect to="/home" />
-                    )}
-                  />
-                  <Route
-                    path="/randomquestion"
-                    component={RandomQuestion}
-                  />
-                  <Route
-                    path="/home"
-                    component={Home}
-                  />
-                  <Route
-                    exact
-                    path="/newquestion"
-                    render={() => (
-                      <NewQuestion
-
+      <Fragment>
+        <LoadingBar />
+        <Router>
+        <div className="App">
+        {
+          this.props.loading
+            ? null
+            : <Fragment>
+                <Nav />
+                {
+                  this.props.isLoggedOut
+                  ? <div>
+                      <SignIn/>
+                    </div>
+                  : <div>
+                      <Route
+                        exact
+                        path="/"
+                        render={() => (
+                          <Redirect to="/home" />
+                        )}
                       />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path="/leaderboard"
-                    render={() => (
-                      <LeaderBoard
-
+                      <Route
+                        path="/randomquestion"
+                        component={RandomQuestion}
                       />
-                    )}
-                  />
-
-                  <Route
-                    exact
-                    path="/logout"
-                    render={() => (
-                      <SignIn
-
+                      <Route
+                        path="/home"
+                        component={Home}
                       />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path="/questions/:id"
-                    component={Poll}
-                  />
-                  <Route path="/404" component={My404} />
-                </div>
-            }
-          </div>
-        </Fragment>
-      </Router>
+                      <Route
+                        exact
+                        path="/newquestion"
+                        render={() => (
+                          <NewQuestion />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/leaderboard"
+                        render={() => (
+                          <LeaderBoard />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/logout"
+                        render={() => (
+                          <SignIn />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/questions/:id"
+                        component={Poll}
+                      />
+                      <Route path="/404" component={My404} />
+                    </div>
+                }
+              </Fragment>
+        }
+        </div>
+        </Router>
+      </Fragment>
     );
   }
 }
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ authedUser, users }) {
+  console.log('mapStateToProps');
   return {
-    loading: authedUser === null
+    loading: Object.keys(users).length === 0,
+    isLoggedOut: authedUser === null
   }
 }
 
 export default connect(mapStateToProps)(App)
-
-
-
-
-
-
-
-
