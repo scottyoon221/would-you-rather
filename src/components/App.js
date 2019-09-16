@@ -14,8 +14,6 @@ import My404 from './My404';
 
 
 class App extends Component {
-
-
   componentDidMount() {
     this.props.dispatch(handleInitialData());
   }
