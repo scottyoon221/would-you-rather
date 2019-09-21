@@ -18,26 +18,51 @@ class SignIn extends React.Component {
 
   render () {
     const { users } = this.props;
+    const assets = require.context('../assets', false);
+    let avatar;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>Welcome to the Would You Rather App!</div>
-        <div>Please sign in to continue</div>
-        <div>Sign in</div>
-        <div>
-          <select ref={(select) => this.selected = select} onChange={this.handleSelect} defaultValue="choose" >
-            <option value="choose" disabled hidden>Choose here</option>
-            {
-              users ?
-              Object.keys(users).map((keyname) => {
-                return <option key={keyname} value={users[keyname].id}>{users[keyname].name}</option>
-              })
-              :
-              null
-            }
-          </select>
-        </div>
-        <input type="submit" value="Sign In" />
-      </form>
+      <div class="container border">
+        <form onSubmit={this.handleSubmit}>
+          <div class="welcome border">
+            <div class="row">
+              <div class="col text-center">
+                <b>Welcome to the Would You Rather App!</b>
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col">Please sign in to continue</div>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col">
+              <img src={assets('./logo.png')} alt="logo" width="300px" />
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col signin-text"><b>Sign in</b></div>
+          </div>
+          <div class="user-dropdown row">
+            <div class="col text-center">
+              <select class="form-control" ref={(select) => this.selected = select} defaultValue="choose" >
+                <option value="choose" disabled hidden>Select User</option>
+                {
+                  users
+                  ? Object.keys(users).map((keyname) => {
+                    avatar = assets(users[keyname].avatarURL);
+                    return <option data-thumbnail={avatar} key={keyname} value={users[keyname].id} >{users[keyname].name}</option>
+                    })
+                  : null
+                }
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <input type="submit" value="Sign In" class="signin btn btn-primary"/>
+            </div>
+          </div>
+        </form>
+      </div>
     );
   }
 }

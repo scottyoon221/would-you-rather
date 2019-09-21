@@ -23,17 +23,27 @@ class NewQuestion extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>Create New NewQuestion</div>
-        <div>Complete the question:</div>
-        <div>Would you rather ...</div>
-        <input type="text" name="Enter Option One Text Here" ref={(input) => this.optionOneInput = input}/>
-        <div>OR</div>
-        <input type="text" name="Enter Option Two Text Here" ref={(input) => this.optionTwoInput = input}/>
-        <div>
-          <input type="submit" value="Submit" />
-        </div>
-      </form>
+      <div class="container">
+        <form onSubmit={this.handleSubmit}>
+          <div class="row border new-question-box">
+            <div class="col-12 border-bottom text-center create-box">
+              <b>Create New NewQuestion</b>
+            </div>
+            <div class="col-12">Complete the question:</div>
+            <div class="col-12"><b>Would you rather ...</b></div>
+            <div class="col-12 text-center input-text">
+              <input class="form-control" type="text" name="Enter Option One Text Here" ref={(input) => this.optionOneInput = input} placeholder="Enter Option One Text Here!"/>
+            </div>
+            <div class="col-12 text-center or"><b>OR</b></div>
+            <div class="col-12 text-center input-text">
+              <input class="form-control" type="text" name="Enter Option Two Text Here" ref={(input) => this.optionTwoInput = input} placeholder="Enter Option Two Text Here"/>
+            </div>
+            <div class="col-12 text-center">
+              <input type="submit" value="Submit" class="create-btn btn btn-primary" />
+            </div>
+          </div>
+        </form>
+      </div>
     );
   }
 }

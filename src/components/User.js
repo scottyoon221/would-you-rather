@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 class User extends React.Component {
   render () {
@@ -8,16 +8,38 @@ class User extends React.Component {
     const avatars = require.context('../assets', false);
     const avatar = avatars(this.props.user.avatarURL);
     return (
-      <div>
-        <div><img src={avatar} alt={user.name} width="50px"/></div>
-        <div>{user.name}</div>
-        <div>Answer questions</div>
-        <div>{numOfAnswers}</div>
-        <div>Created questions</div>
-        <div>{numOfQuestions}</div>
-        <div>Score</div>
-        <div>{numOfAnswers + numOfQuestions}</div>
-      </div>
+      <Fragment>
+        <div class="col-3 border-right align-self-center text-center">
+          <img class="avatar-circle-image" src={avatar} alt={user.name}/>
+        </div>
+        <div class="col-6 border-right">
+          <div class="row">
+            <div class="col-12">
+              <b>{user.name}</b>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-10">Answer questions</div>
+            <div class="col-2">{numOfAnswers}</div>
+          </div>
+          <div class="row">
+            <div class="col-10">Created questions</div>
+            <div class="col-2">{numOfQuestions}</div>
+          </div>
+        </div>
+        <div class="col-3 border">
+          <div class="row border score-box">
+            <div class="col-12 border-bottom text-center header-col">
+              <b>Score</b>
+            </div>
+            <div class="col-12 align-self-center text-center ">
+              <div>
+                {numOfAnswers + numOfQuestions}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }

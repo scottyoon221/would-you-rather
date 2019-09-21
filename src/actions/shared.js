@@ -29,7 +29,6 @@ export function handleSaveQuestionAnswer ({ authedUser, qid, answer }) {
   return (dispatch) => {
     return _saveQuestionAnswer({ authedUser, qid, answer })
       .then(() => {
-        console.log('saved');
         dispatch(addVoteUser({ authedUser, qid, answer }));
         dispatch(addVoteQuestion({ authedUser, qid, answer }));
       })

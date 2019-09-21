@@ -5,16 +5,16 @@ class LeaderBoard extends React.Component {
   render () {
     const { users } = this.props;
     return (
-      <ul>
+      <div class="container">
         {Object.keys(users).length ?
           Object.keys(users).map(key =>
-            <div key={key}>
+            <div class="row border leader-box" key={key}>
               <User user={users[key]}/>
             </div>
           )
         :
           null}
-      </ul>
+      </div>
     );
   }
 }

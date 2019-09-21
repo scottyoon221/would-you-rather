@@ -4,11 +4,16 @@ import { withRouter } from 'react-router-dom'
 import { handleSaveQuestionAnswer } from '../actions/shared';
 
 class Survey extends React.Component {
+
+  handleChange = (e) => {
+    this.optionInput = e.target.value;
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { authedUser, question } = this.props;
     // save vote
-    this.props.dispatch(handleSaveQuestionAnswer({ authedUser, qid: question.id, answer: this.optionInput.value}));
+    this.props.dispatch(handleSaveQuestionAnswer({ authedUser, qid: question.id, answer: this.optionInput}));
     this.props.history.push(`/questions/${question.id}`);
   }
 
@@ -17,18 +22,28 @@ class Survey extends React.Component {
     const avatars = require.context('../assets', false);
     const avatar = avatars(user.avatarURL);
     return (
-      <div>
+      <div class="container border">
         <form onSubmit={this.handleSubmit}>
-          {user.name} asks:
-          <div><img src={avatar} alt={question.author} width="50px"/></div>
-          <div>Would you rather ...</div>
-          <div>
-            <label><input type="radio" name="question" value="optionOne" ref={(input) => this.optionInput = input}/>{question.optionOne.text}</label>
+          <div class="row border-bottom user-box">
+            <div class="col-12">
+              <b>{user.name} asks:</b>
+            </div>
           </div>
-          <div>
-            <label><input type="radio" name="question" value="optionTwo" ref={(input) => this.optionInput = input}/>{question.optionTwo.text}</label>
+          <div class="row question-box">
+            <div class="col-4 border-right align-self-center text-center">
+              <img src={avatar} class="avatar-circle-image" alt={question.author} />
+            </div>
+            <div class="col-8">
+              <div class="would-you-rather"><b>Would you rather ...</b></div>
+              <div>
+                <label><input type="radio" name="question" value="optionOne" onChange={this.handleChange}/> {question.optionOne.text}</label>
+              </div>
+              <div>
+                <label><input type="radio" name="question" value="optionTwo" onChange={this.handleChange} /> {question.optionTwo.text}</label>
+              </div>
+              <input type="submit" value="Submit" class="signin btn btn-primary" />
+            </div>
           </div>
-          <input type="submit" value="Submit" />
         </form>
       </div>
     );

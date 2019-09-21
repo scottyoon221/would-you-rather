@@ -1,0 +1,125 @@
+.container {
+  padding: 0;
+}
+
+.welcome {
+  background-color: #e6e6e6;
+}
+
+.signin-text {
+  font-size: 20px;
+  color: #3eb8c1;
+  margin-bottom: 20px;
+}
+.user-dropdown.row {
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.signin{
+  margin-bottom: 15px;
+  width: 95%;
+}
+
+.nav-gap {
+  margin: 50px 0;
+}
+
+.would-you-rather {
+  font-size: 15px;
+}
+
+.user-box {
+  padding: 15px 0 15px 10px;
+  margin: 0;
+  background-color: #e6e6e6;
+}
+.test {
+  border: solid red 4px;
+}
+.question-box {
+  padding: 10px 10px;
+}
+
+.avatar-circle-image {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.vote-box {
+  position: relative;
+  margin: 10px 5px;
+  padding: 5px 10px;
+}
+
+.your-vote-box {
+  background-color: #e6ffff;
+  border-color: #99ffff;
+}
+
+.your-vote-sticker {
+  position: absolute;
+  right: -11px;
+  top: -11px;
+  color: white;
+  background-color: #e6e600;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  line-height: 14px;
+  font-size: 9px;
+  text-align: center;
+  z-index: 999;
+}
+
+.questions-box {
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.question-container {
+  margin-bottom: 30px;
+}
+
+.view-poll-btn {
+  margin-top: 20px;
+}
+
+.question {
+  margin-top: 10px;
+}
+
+.header-col {
+  background-color: #e6e6e6;
+}
+
+.score-box {
+  margin: 15px;
+}
+
+.leader-box {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.new-question-box {
+  left: 300px;
+}
+.create-box {
+  padding: 10px;
+  font-size: 30px;
+}
+
+.input-text {
+  width: 90%;
+  margin-bottom: 15px;
+}
+
+.create-btn {
+  width: 100%;
+}
+
+.or {
+  margin-bottom: 15px
+}

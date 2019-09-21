@@ -1,55 +1,55 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
-class Nav extends React.Component {
+class Navigation extends React.Component {
   render () {
     const {user} = this.props;
     const avatars = require.context("../assets", false);
     return (
-      <nav className="nav">
-        <ul>
-          <li>
-            <NavLink to="/home" exact activeClassName="active">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/newquestion" activeClassName="active">
-              New Question
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/leaderboard" activeClassName="active">
-              Leader Board
-            </NavLink>
-          </li>
+      <Fragment>
+        <div class="nav-gap">
+        <Nav fill variant="tabs" defaultActiveKey="/home">
+          <Nav.Item>
+            <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link as={NavLink} to="/newquestion">New Question</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link as={NavLink} to="/leaderboard">Leader Board</Nav.Link>
+          </Nav.Item>
           {
-            user ?
-              <Fragment>
-                <li>
-                Hello, {user.name}
-                </li>
-                <li>
-                  <img src={avatars(user.avatarURL)} alt={user.name} width="25px"/>
-                </li>
-                <li>
-                  <NavLink to="/logout" activeClassName="active">
+            user
+            ? <Fragment>
+                <Nav.Item>
+                  <Nav.Link disabled>
+                    Hello, {user.name}
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link disabled>
+                    <img src={avatars(user.avatarURL)} alt={user.name} width="25px"/>
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link as={NavLink} to="/logout">
                     Log Out
-                  </NavLink>
-                </li>
+                  </Nav.Link>
+                </Nav.Item>
               </Fragment>
-              :
-              null
+            : null
           }
-        </ul>
-      </nav>
+        </Nav>
+        </div>
+      </Fragment>
     );
   }
 }
 
-function mapStateToProps ({ authedUser, users }) {
+function mapStateToProps ({ authedUser, users }, props) {
   return { user: users[authedUser] }
 }
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Navigation));

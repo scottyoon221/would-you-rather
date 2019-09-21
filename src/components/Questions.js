@@ -6,15 +6,16 @@ import Question from './Question';
 class Questions extends React.Component {
   render () {
     return (
-      <div>
-        {this.props.questions.length ?
-          this.props.questions.map((question) => (
-              <div key={question.id}>
+      <div class="row border questions-box">
+        {
+          this.props.questions.length
+          ? this.props.questions.map((question) => (
+              <div class="col-12 border question-container" key={question.id}>
                 <Question question={question}/>
               </div>
             ))
-        :
-          null}
+          : null
+        }
       </div>
     );
   }

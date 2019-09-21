@@ -89,7 +89,6 @@ class App extends Component {
 }
 
 function mapStateToProps ({ authedUser, users }) {
-  console.log('mapStateToProps');
   return {
     loading: Object.keys(users).length === 0,
     isLoggedOut: authedUser === null

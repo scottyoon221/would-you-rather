@@ -1,24 +1,26 @@
 import React from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, withRouter } from 'react-router-dom';
+
 import Questions from './Questions';
 
 class Home extends React.Component {
   render () {
     const {match} = this.props;
+    console.log('this-> ',this.props);
     return (
-      <div>
-        <ul>
-          <li>
+      <div class="container">
+        <div class="row border">
+          <div class="col-6 border-right text-center">
             <NavLink to={`${match.url}`} activeClassName="active">
               Unanswered Questions
             </NavLink>
-          </li>
-          <li>
+          </div>
+          <div class="col-6 text-center">
             <NavLink to={`${match.url}/answeredquestions`} activeClassName="active">
               Answered Questions
             </NavLink>
-          </li>
-        </ul>
+          </div>
+        </div>
         <Route
           exact
           path={`${match.path}`}
@@ -33,4 +35,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

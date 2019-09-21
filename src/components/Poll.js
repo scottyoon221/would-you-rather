@@ -25,31 +25,39 @@ class Poll extends React.Component {
     totalVotes !== 0 ? voteOne = (100 * numOfVotesOne / totalVotes).toFixed(1) : voteOne = 0;
     totalVotes !== 0 ? voteTwo = (100 * numOfVotesTwo / totalVotes).toFixed(1) : voteTwo = 0;
     return (
-      <div>
-        <div>
-          Asked by {user.name}
+      <div class="container border">
+        <div class="row border-bottom user-box">
+          <b>Asked by {user.name}</b>
         </div>
-        <div>
-            <div><img src={avatar} alt={question.author} width="50px"/></div>
-          <div>
+        <div class="row poll-box">
+          <div class="col-4 border-right align-self-center text-center">
+            <img src={avatar} class="avatar-circle-image" alt={question.author}/>
+          </div>
+          <div class="col-8">
             <div>
-              Results:
+              <b>Results:</b>
             </div>
-            <div>
+            <div class={`vote-box border ${question.optionOne.votes.includes(authedUser) ? 'your-vote-box': null}`}>
               <div>
-                { question.optionOne.votes.includes(authedUser) ? <div>Your Vote</div> : null }
+                { question.optionOne.votes.includes(authedUser) ? <div class="your-vote-sticker"><b>Your Vote</b></div> : null }
               </div>
               <div>Would you rather {question.optionOne.text}?</div>
-              <div>{voteOne}%</div>
-              <div>{numOfVotesOne} out of {totalVotes} votes</div>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style={{width: `${voteOne}%`}} aria-valuenow={voteOne} aria-valuemin="0" aria-valuemax="100">{voteOne}%</div>
+              </div>
+              <div class="text-center"><b>{numOfVotesOne} out of {totalVotes} votes</b></div>
             </div>
-            <div>
+            <div class={`vote-box border ${question.optionTwo.votes.includes(authedUser) ? 'your-vote-box': null}`}>
               <div>
-                { question.optionTwo.votes.includes(authedUser) ? <div>Your Vote</div> : null }
+                {
+                  question.optionTwo.votes.includes(authedUser) ? <div class="your-vote-sticker"><b>Your Vote</b></div> : null
+                }
               </div>
               <div>Would you rather {question.optionTwo.text}?</div>
-              <div>{voteTwo}%</div>
-              <div>{numOfVotesTwo} out of {totalVotes} votes</div>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style={{width: `${voteTwo}%`}} aria-valuenow={voteTwo} aria-valuemin="0" aria-valuemax="100">{voteTwo}%</div>
+              </div>
+              <div class="text-center"><b>{numOfVotesTwo} out of {totalVotes} votes</b></div>
             </div>
           </div>
         </div>

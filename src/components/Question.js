@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -19,15 +19,37 @@ class Question extends React.Component {
     const avatars = require.context('../assets', false);
     const avatar = avatars(user.avatarURL);
     return (
-      <div>
-        {user.name} asks:
-        <div><img src={avatar} alt={question.author} width="50px"/></div>
-        <div>Would you rather</div>
-        <div>{question.optionOne.text}</div>
-        <button onClick={this.handleClick}>
-          View Poll
-        </button>
-      </div>
+      <Fragment>
+        <div class="row border-bottom">
+          <div class="col-12 user-box">
+            <b>{user.name} asks:</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 border-right align-self-center text-center">
+            <img class="avatar-circle-image" src={avatar} alt={question.author} />
+          </div>
+          <div class="col-8 question-box">
+            <div class="row">
+              <div class="col would-you-rather">
+                <b>Would you rather</b>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col question">
+                {question.optionOne.text}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col view-poll-btn">
+                <button class="btn btn-primary" onClick={this.handleClick}>
+                View Poll
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }
